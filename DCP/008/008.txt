@@ -11,3 +11,9 @@ For example, the following tree has 5 unival subtrees:
    1   0
   / \
  1   1
+
+======================
+Unival subtrees in example:
+-Every 1 leaf (3)
+-The 0 leaf
+-The 1=>(1,1) subtree

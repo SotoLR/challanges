@@ -3,3 +3,65 @@ Given the mapping a = 1, b = 2, ... z = 26, and an encoded message, count the nu
 For example, the message '111' would give 3, since it could be decoded as 'aaa', 'ka', and 'ak'.
 
 You can assume that the messages are decodable. For example, '001' is not allowed.
+
+======================================================================
+1->A
+2->B
+3->C
+4->D
+5->E
+6->F
+7->G
+8->H
+9->I
+10->J
+11->K
+12->L
+13->M
+14->N
+15->O
+16->P
+17->Q
+18->R
+19->S
+20->T
+21->U
+22->V
+23->W
+24->X
+25->Y
+26->Z
+
+IDEAS
+Use dp and work from left to right
+e.g. 12121
+1 -> a (1)
+121 -> aba, au, la (3)
+1212 ->
+	Everything from 121, appending the 2 at the end
+		abab, aub, lab
+	Add results for [12][12] and [1][2][12]
+		ll, abl
+	Final result for 1212 -> abab, aub, lab, ll, abl (5)
+12121 ->
+	Everything from 1212, appending 1 at the end
+		ababa, auba, laba, lla, abla
+	And then
+		Everything from 121,
+			aba, au, la
+		...xjoined with everything from 21 ******************* xjoin for others as well, no?
+			u, ba
+
+
+Use recursion
+	def solve(msg):
+		if len(msg)>3:
+			return solve(msg[:-1])+solve(msg[:-2]) #these list slices are wrong
+		else:
+			if msg in hash_map:
+				return hash_map.get(msg)
+			else:
+				#Algorithm to resolve msg of len 3 goes here
+				#save result to hash map
+				#return result
+Too much memory, even with DP?
