@@ -15,25 +15,30 @@ def printLine(line):
 	print('{}\t{}\t{}\t'.format())
 
 def filter(data, copied=-1,started=-1,done=-1):
-	include_copied = True
-	include_started = True
-	include_done = True
-	if copied == -1:
-		copied = 0
-		include_copied = False
-	if started == -1:
-		started = 0
-		include_started = False
-	if done == -1:
-		done = 0
-		include_done = False
-	for line in data:
-		if (include_copied and line[1]==str(copied)) and (include_started and line[2]==str(started)) and (include_done and line[3]==str(done)):
-			#printLine(line)
+	ignore_copied = True
+	ignore_started = True
+	ignore_done = True
+	if copied != -1:
+		#print("Checking copied ", copied)
+		ignore_copied = False
+	if started != -1:
+		#print("Checking started ", started)
+		ignore_started = False
+	if done != -1:
+		#print("Checking done ", done)
+		ignore_done = False
+	for line in data[1:]:
+		#print(line)
+		#print(f"Ignore copied:{ignore_copied} started:{ignore_started} done:{ignore_done}")
+		#print(f"Values copied {int(line[1])}:{copied} started {int(line[2])}:{started} done {int(line[3])}:{done}")
+		#print(f"Evaluations {ignore_copied or int(line[1])==copied} {ignore_started or int(line[2])==started} {ignore_done or int(line[3])==done}")
+		if (ignore_copied or int(line[1])==copied) and (ignore_started or int(line[2])==started) and (ignore_done or int(line[3])==done):
 			print(line)
+			#print("=======PRINT THIS PRINT THIS PRINT THIS PRINT THIS PRINT THIS=======")
+		#print("===")
+
 
 #################
 data = readFile("checklist.txt")
-filter(data, 1,1,1)
-print("=================")
-filter(data, 1)
+
+filter(data,started=0)

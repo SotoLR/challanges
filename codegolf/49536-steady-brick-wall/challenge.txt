@@ -1,0 +1,68 @@
+https://codegolf.stackexchange.com/questions/49536/build-a-steady-brick-wall
+
+A brick wall is a rectangle made of horizontal 1-by-n bricks stacked into rows. Here's a wall of height 4 and width 8, with brick sizes shown on the right.
+
+[______][______]    4 4
+[__][____][__][]    2 3 2 1
+[][______][____]    1 4 3
+[____][______][]    3 4 1
+
+This wall is unsteady because it has a fault, a place where two vertical cracks between bricks line up, shown below with parens in the surrounding bricks.
+
+[______][______]
+[__][____)(__][]
+[][______)(____]
+[____][______][]
+
+But, the cracks bordering the size-1 bricks on the right don't form a fault because they are separated by a row.
+
+Write code that finds and displays a steady wall constructed out of bricks of specified sizes. Fewest bytes wins.
+
+
+INPUT:
+A non-empty list of brick sizes (positive numbers) and a height that's at least 2. This list may be sorted if you wish. You may alternatively take in a count of bricks of each size.
+
+OUTPUT:
+A picture of a steady rectangular wall of the required height that uses all the bricks given. Print it or return it as a string with newlines.
+
+Draw a brick of size n as 2n characters, underscores surrounded by brackets.
+
+1: []
+2: [__]
+3: [____]
+4: [______]
+...
+
+The input is guaranteed to have at least one solution. If there's multiple, you should still only draw one wall.
+
+There's no time restriction; use as much brute force as you want. Your algorithm should in theory work on inputs of any size.
+
+Test cases
+Solutions may differ
+
+>> [1, 1, 2, 2], 2
+[][__]
+[__][]
+
+>> [1, 1, 1, 2, 2, 2, 2, 3], 2
+[__][____][__]
+[][__][][__][]
+
+>> [1, 1, 2, 2, 3, 3, 3, 3], 3
+[][__][____]
+[__][____][]
+[____][____]
+
+>> [1, 2, 3, 4, 5, 6, 7, 8, 9], 5
+[][______________]
+[__][____________]
+[________________]
+[____][__________]
+[______][________]
+
+>> [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], 5
+[][__][__]
+[__][__][]
+[][__][__]
+[__][__][]
+[][__][__]
