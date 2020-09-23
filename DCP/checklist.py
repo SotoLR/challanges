@@ -108,6 +108,7 @@ def editEntry(data):
 	#Maybe change condition to selection!=5 and simply return if Canceled?
 	if selection == 5:
 		#Canceled
+		pass
 	else:
 		value_dict.get(selection)
 
