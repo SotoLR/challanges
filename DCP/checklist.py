@@ -8,13 +8,7 @@ def main():
 	print("\t4) Print copied")
 	print("\t5) Custom filter")
 	print("\t6) Edit item")
-	opt = -1
-	while True:
-		opt = int(input(">"))
-		if opt<0 or opt>6:
-			print("====== Invalid option ======")
-		else:
-			break
+	opt = getNumOptionInput(">",1,6)
 	if opt == 1:
 		printLine(data[0])
 		filter(data)
@@ -39,7 +33,7 @@ def main():
 		while opt != 0 and opt != 1:
 			pass
 	elif opt == 6:
-		editEntry(len(data))
+		editEntry(data)
 
 
 
@@ -86,17 +80,52 @@ def filter(data, copied=-1,started=-1,done=-1):
 		#print("===")
 	print("========= {} Results found =========".format(result_count))
 
-def editEntry(data_len):
+def editEntry(data):
+	start_index = 3
+	data_len = len(data)
+
+	entry_id = getNumOptionInput("# of entry to change ({}-{}): ".format(start_index+1, data_len-start_index), start_index, data_len-start_index)
+	print()
+	printLine(data[0])
+	printLine(data[entry_id - start_index])
+	print()
+	print("\t1) Set as 'Not copied'")
+	print("\t2) Set as 'Copied'")
+	print("\t3) Set as 'Started'")
+	print("\t4) Set as 'Done'")
+	print("\t5) Cancel change")
+	selection = getNumOptionInput(">",1,5)
+	print(selection)
+	#TODO: Test that all works well so far
+	#Edit entry based on input
+	value_dict = {
+		1: [0,0,0],
+		2: [1,0,0],
+		3: [1,1,0],
+		4: [1,1,1]
+	}
+
+	#Maybe change condition to selection!=5 and simply return if Canceled?
+	if selection == 5:
+		#Canceled
+		pass
+	else:
+		value_dict.get(selection)
+
+
+
+def getNumOptionInput(prompt,minval,maxval):
+	opt = minval - 1
 	while True:
-			try:
-				entry_id = int(input(f"# of entry to change (4-{data_len}): "))
-				if entry_id > 3 and entry_id < data_len-1:
-					break
-				else:
-					print(f"Invalid entry: {entry_id} is outside of the range of problems (4-{data_len}).")
-			except ValueError:
-				print(f"Invalid entry: {entry_id} is not recognized as a number.")
-			print("Please try again.\n")
+		try:
+			opt = int(input(prompt))
+			if opt<minval or opt>maxval:
+				print(f"====== Invalid option: {opt} is out of range ({minval}-{maxval}) ======")
+			else:
+				break
+		except ValueError:
+			print(f"====== Invalid entry: {entry_id} is not recognized as a number ======")
+	return opt
 
 #################
 main()

@@ -8,3 +8,35 @@ def cons(a, b):
     return pair
 
 Implement car and cdr.
+
+========================
+
+Explanation:
+I did not understand the cons function, so I looked it up. 
+	https://stackoverflow.com/questions/52481607/dont-understand-the-inner-function-in-python
+	https://en.wikipedia.org/wiki/Closure_(computer_programming)
+		Closure basically means a function defined inside another function has access to the variables & objects from its parent function.
+
+Stepping through it...
+	def cons(a, b):			#define a function 'cons' that takes two arguments
+	    def pair(f):		#define a function 'pair' that takes one argument
+	        return f(a, b)	#Use the given argument as a function, called with the two variables passed to 'cons'. This works because of Closure (see above)
+	    return pair			#Return the (reference to) function 'pair'
+
+In other words, cons(a,b) returns a function reference. The referred function will run with the arguments given to 'cons', in this case a and b.
+Calling cons(1,2)(print) returns
+	pair(print)
+which, in turn, is
+	print(1,2)
+which prints the string "1 2"
+
+So now all we need is a function that returns its first parameter and one that returns its second.
+
+def print_first(a,b):
+	return a
+
+def print_second(a,b):
+	return b
+
+After that, all that is left is wrapping each in 'car' and 'cdr', but returning the result of calling each function.
+Hence the solution.

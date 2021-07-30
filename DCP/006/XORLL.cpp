@@ -22,6 +22,7 @@ public:
 	xorNode(int data, xorNode* previous){
 
 	}
+	
 private:
 
 }
